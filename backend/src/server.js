@@ -72,7 +72,7 @@ const documentCRUD = new DocumentCRUD(saveToDB);
  */
 
 // 1. Get Seeded Users
-app.get('/api/users', (req, res) => {
+app.get(['/api/users', '/users'], (req, res) => {
   try {
     const users = saveToDB.getUsers();
     res.json(users);
@@ -82,7 +82,7 @@ app.get('/api/users', (req, res) => {
 });
 
 // 2. List Documents for Active User
-app.get('/api/documents', async (req, res) => {
+app.get(['/api/documents', '/documents'], async (req, res) => {
   try {
     const userId = req.query.userId || 'user_alice';
     const documents = await documentCRUD.listDocuments(userId);
@@ -93,7 +93,7 @@ app.get('/api/documents', async (req, res) => {
 });
 
 // 3. Create Document
-app.post('/api/documents', async (req, res) => {
+app.post(['/api/documents', '/documents'], async (req, res) => {
   try {
     const body = req.body || {};
     const { title, ownerId, initialElements } = body;
@@ -120,7 +120,7 @@ app.post('/api/documents', async (req, res) => {
 });
 
 // 4. Get Document by ID (with DocumentEditor renderDoc)
-app.get('/api/documents/:id', async (req, res) => {
+app.get(['/api/documents/:id', '/documents/:id'], async (req, res) => {
   try {
     const userId = req.query.userId || 'user_alice';
     const result = await documentCRUD.getDocument(req.params.id, userId);
@@ -145,7 +145,7 @@ app.get('/api/documents/:id', async (req, res) => {
 });
 
 // 5. Update Document (Save title, elements via DocumentEditor)
-app.put('/api/documents/:id', async (req, res) => {
+app.put(['/api/documents/:id', '/documents/:id'], async (req, res) => {
   try {
     const userId = req.query.userId || 'user_alice';
     const body = req.body || {};
@@ -173,7 +173,7 @@ app.put('/api/documents/:id', async (req, res) => {
 });
 
 // 6. Delete Document
-app.delete('/api/documents/:id', async (req, res) => {
+app.delete(['/api/documents/:id', '/documents/:id'], async (req, res) => {
   try {
     const userId = req.query.userId || 'user_alice';
     const success = await documentCRUD.deleteDocument(req.params.id, userId);
@@ -188,7 +188,7 @@ app.delete('/api/documents/:id', async (req, res) => {
 });
 
 // 7. Share Document
-app.post('/api/documents/:id/share', async (req, res) => {
+app.post(['/api/documents/:id/share', '/documents/:id/share'], async (req, res) => {
   try {
     const userId = req.query.userId || 'user_alice';
     const body = req.body || {};
@@ -217,7 +217,7 @@ app.post('/api/documents/:id/share', async (req, res) => {
 });
 
 // 8. Export Document to File (SaveToFile persistence strategy)
-app.post('/api/documents/:id/export', async (req, res) => {
+app.post(['/api/documents/:id/export', '/documents/:id/export'], async (req, res) => {
   try {
     const userId = req.query.userId || 'user_alice';
     const body = req.body || {};
@@ -239,7 +239,7 @@ app.post('/api/documents/:id/export', async (req, res) => {
 });
 
 // 9. Upload Image File into Document
-app.post('/api/upload/image', upload.single('image'), (req, res) => {
+app.post(['/api/upload/image', '/upload/image'], upload.single('image'), (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ error: "No image file uploaded." });
@@ -257,7 +257,7 @@ app.post('/api/upload/image', upload.single('image'), (req, res) => {
 });
 
 // 10. File Import Endpoint (.txt, .md, .docx)
-app.post('/api/upload/import', upload.single('file'), async (req, res) => {
+app.post(['/api/upload/import', '/upload/import'], upload.single('file'), async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded for import." });
@@ -301,7 +301,7 @@ app.post('/api/upload/import', upload.single('file'), async (req, res) => {
 });
 
 // Health check route
-app.get('/api/health', (req, res) => {
+app.get(['/api/health', '/health'], (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
