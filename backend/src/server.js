@@ -12,8 +12,15 @@ import { DocumentCRUD } from './services/DocumentCRUD.js';
 import { DocumentEditor } from './services/DocumentEditor.js';
 import { parseFileToElements } from './utils/fileParser.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const safeDirname = () => {
+  try {
+    if (import.meta && import.meta.url && import.meta.url.startsWith('file:')) {
+      return path.dirname(fileURLToPath(import.meta.url));
+    }
+  } catch (e) {}
+  return process.cwd();
+};
+const __dirname = safeDirname();
 
 const app = express();
 const PORT = process.env.PORT || 5001;

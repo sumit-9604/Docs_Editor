@@ -4,8 +4,15 @@ import os from 'os';
 import { fileURLToPath } from 'url';
 import { AbstractPersistentSaveFunctions } from './AbstractPersistentSaveFunctions.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const safeDirname = () => {
+  try {
+    if (import.meta && import.meta.url && import.meta.url.startsWith('file:')) {
+      return path.dirname(fileURLToPath(import.meta.url));
+    }
+  } catch (e) {}
+  return process.cwd();
+};
+const __dirname = safeDirname();
 const EXPORTS_DIR = path.join(__dirname, '../../exports');
 
 /**
