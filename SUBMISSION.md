@@ -13,7 +13,7 @@ This submission contains the full-stack codebase, architecture documentation, AI
 | **[ARCHITECTURE.md](file:///c:/Users/Sumit/OneDrive/Desktop/dummy%20dashboards/Docs_editor/ARCHITECTURE.md)** | System architecture note mapping code directly to visual UML diagram. | ✅ Complete |
 | **[AI_WORKFLOW.md](file:///c:/Users/Sumit/OneDrive/Desktop/dummy%20dashboards/Docs_editor/AI_WORKFLOW.md)** | AI instruction log detailing diagram-to-code translation, speed-ups, & verification. | ✅ Complete |
 | **[SUBMISSION.md](file:///c:/Users/Sumit/OneDrive/Desktop/dummy%20dashboards/Docs_editor/SUBMISSION.md)** | Submission manifest and feature status. | ✅ Complete |
-| **`LIVE_URL.txt`** | Text file template for live product URL. | 📝 Template Provided |
+| **`LIVE_URL.txt`** | Public live deployment URL (Vercel). | ✅ Complete (`https://docs-editor-vert.vercel.app/`) |
 | **`WALKTHROUGH_URL.txt`** | Text file template for walkthrough video link. | 📝 Template Provided |
 | **`backend/`** | Express backend, models, services, persistence layers, file parsers, & tests. | ✅ Complete |
 | **`frontend/`** | React + Vite frontend, toolbar, editor canvas, user switcher, & modals. | ✅ Complete |
