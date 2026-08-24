@@ -1,56 +1,88 @@
 import fs from 'fs';
 import path from 'path';
+import os from 'os';
 import { fileURLToPath } from 'url';
 import { AbstractPersistentSaveFunctions } from './AbstractPersistentSaveFunctions.js';
 import { Document } from '../models/Document.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const DATA_DIR = path.join(__dirname, '../../data');
-const DB_FILE = path.join(DATA_DIR, 'documents_db.json');
+
+// Initial Seed Users Data
+const INITIAL_SEED = {
+  documents: {},
+  users: {
+    "user_alice": { id: "user_alice", name: "Alice Smith", email: "alice@ajaia.com", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alice" },
+    "user_bob": { id: "user_bob", name: "Bob Johnson", email: "bob@ajaia.com", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Bob" },
+    "user_charlie": { id: "user_charlie", name: "Charlie Lee", email: "charlie@ajaia.com", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Charlie" }
+  }
+};
 
 /**
  * Concrete implementation of AbstractPersistentSaveFunctions for DB persistence.
  * Corresponds to 'save to db' box in architecture diagram.
+ * Supports Vercel Serverless environment (/tmp fallback & memory cache).
  */
 export class SaveToDB extends AbstractPersistentSaveFunctions {
   constructor(customDbPath = null) {
     super();
-    this.dbPath = customDbPath || DB_FILE;
+    this.memoryCache = JSON.parse(JSON.stringify(INITIAL_SEED));
+    this.dbPath = customDbPath || this.resolveDbPath();
     this.ensureDbExists();
   }
 
-  ensureDbExists() {
-    const dir = path.dirname(this.dbPath);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
+  resolveDbPath() {
+    if (process.env.VERCEL || process.env.NODE_ENV === 'production') {
+      return path.join(os.tmpdir(), 'documents_db.json');
     }
-    if (!fs.existsSync(this.dbPath)) {
-      const initialData = {
-        documents: {},
-        users: {
-          "user_alice": { id: "user_alice", name: "Alice Smith", email: "alice@ajaia.com", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alice" },
-          "user_bob": { id: "user_bob", name: "Bob Johnson", email: "bob@ajaia.com", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Bob" },
-          "user_charlie": { id: "user_charlie", name: "Charlie Lee", email: "charlie@ajaia.com", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=Charlie" }
+    return path.join(__dirname, '../../data/documents_db.json');
+  }
+
+  ensureDbExists() {
+    try {
+      const dir = path.dirname(this.dbPath);
+      if (!fs.existsSync(dir)) {
+        fs.mkdirSync(dir, { recursive: true });
+      }
+      if (!fs.existsSync(this.dbPath)) {
+        fs.writeFileSync(this.dbPath, JSON.stringify(INITIAL_SEED, null, 2), 'utf-8');
+      }
+    } catch (err) {
+      // Fallback to /tmp if primary directory is read-only (EROFS)
+      try {
+        this.dbPath = path.join(os.tmpdir(), 'documents_db.json');
+        if (!fs.existsSync(this.dbPath)) {
+          fs.writeFileSync(this.dbPath, JSON.stringify(INITIAL_SEED, null, 2), 'utf-8');
         }
-      };
-      fs.writeFileSync(this.dbPath, JSON.stringify(initialData, null, 2), 'utf-8');
+      } catch (e) {
+        console.warn("Using in-memory DB cache due to serverless read-only filesystem.");
+      }
     }
   }
 
   readData() {
-    this.ensureDbExists();
     try {
-      const raw = fs.readFileSync(this.dbPath, 'utf-8');
-      return JSON.parse(raw);
+      this.ensureDbExists();
+      if (fs.existsSync(this.dbPath)) {
+        const raw = fs.readFileSync(this.dbPath, 'utf-8');
+        const parsed = JSON.parse(raw);
+        this.memoryCache = parsed;
+        return parsed;
+      }
     } catch (err) {
-      console.error("Error reading DB file, returning empty store:", err);
-      return { documents: {}, users: {} };
+      console.warn("Read error from disk, serving memory cache:", err.message);
     }
+    return this.memoryCache;
   }
 
   writeData(data) {
-    fs.writeFileSync(this.dbPath, JSON.stringify(data, null, 2), 'utf-8');
+    this.memoryCache = data;
+    try {
+      this.ensureDbExists();
+      fs.writeFileSync(this.dbPath, JSON.stringify(data, null, 2), 'utf-8');
+    } catch (err) {
+      console.warn("Write error to disk, maintained in-memory:", err.message);
+    }
   }
 
   /**
@@ -120,6 +152,6 @@ export class SaveToDB extends AbstractPersistentSaveFunctions {
    */
   getUsers() {
     const data = this.readData();
-    return Object.values(data.users || {});
+    return Object.values(data.users || INITIAL_SEED.users);
   }
 }

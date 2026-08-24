@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import os from 'os';
 import { fileURLToPath } from 'url';
 import { AbstractPersistentSaveFunctions } from './AbstractPersistentSaveFunctions.js';
 
@@ -14,9 +15,20 @@ const EXPORTS_DIR = path.join(__dirname, '../../exports');
 export class SaveToFile extends AbstractPersistentSaveFunctions {
   constructor(exportDir = null) {
     super();
-    this.exportDir = exportDir || EXPORTS_DIR;
-    if (!fs.existsSync(this.exportDir)) {
-      fs.mkdirSync(this.exportDir, { recursive: true });
+    this.exportDir = exportDir || (process.env.VERCEL ? path.join(os.tmpdir(), 'exports') : EXPORTS_DIR);
+    try {
+      if (!fs.existsSync(this.exportDir)) {
+        fs.mkdirSync(this.exportDir, { recursive: true });
+      }
+    } catch (err) {
+      this.exportDir = path.join(os.tmpdir(), 'exports');
+      try {
+        if (!fs.existsSync(this.exportDir)) {
+          fs.mkdirSync(this.exportDir, { recursive: true });
+        }
+      } catch (e) {
+        console.warn("Using memory for file exports.");
+      }
     }
   }
 
