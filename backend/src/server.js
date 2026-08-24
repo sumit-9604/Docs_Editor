@@ -283,7 +283,7 @@ app.get('/api/health', (req, res) => {
 });
 
 // Start server if run directly
-if (process.env.NODE_ENV !== 'test') {
+if (process.env.NODE_ENV !== 'test' && !process.env.VERCEL) {
   app.listen(PORT, () => {
     console.log(`🚀 Docs Editor Backend running on http://localhost:${PORT}`);
   });

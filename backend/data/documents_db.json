@@ -531,6 +531,42 @@
       "elements": [],
       "createdAt": "2026-08-24T12:27:14.546Z",
       "updatedAt": "2026-08-24T12:27:14.602Z"
+    },
+    "acb77803-6b5c-419a-9a1d-913348860886": {
+      "id": "acb77803-6b5c-419a-9a1d-913348860886",
+      "title": "Shared Strategy Doc (Updated by Bob)",
+      "ownerId": "user_alice",
+      "sharedWith": [
+        {
+          "userId": "user_bob",
+          "role": "editor"
+        },
+        {
+          "userId": "user_charlie",
+          "role": "viewer"
+        }
+      ],
+      "elements": [],
+      "createdAt": "2026-08-24T12:52:05.437Z",
+      "updatedAt": "2026-08-24T12:52:05.497Z"
+    },
+    "3910cbe5-579d-4a71-add9-e868f0c6e173": {
+      "id": "3910cbe5-579d-4a71-add9-e868f0c6e173",
+      "title": "Shared Strategy Doc (Updated by Bob)",
+      "ownerId": "user_alice",
+      "sharedWith": [
+        {
+          "userId": "user_bob",
+          "role": "editor"
+        },
+        {
+          "userId": "user_charlie",
+          "role": "viewer"
+        }
+      ],
+      "elements": [],
+      "createdAt": "2026-08-24T12:55:29.282Z",
+      "updatedAt": "2026-08-24T12:55:29.330Z"
     }
   },
   "users": {
