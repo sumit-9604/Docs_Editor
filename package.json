@@ -2,6 +2,7 @@
   "name": "docs-editor-root",
   "version": "1.0.0",
   "private": true,
+  "type": "module",
   "description": "Collaborative Document Editor inspired by Google Docs",
   "main": "api/index.js",
   "scripts": {
