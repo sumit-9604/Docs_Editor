@@ -76,12 +76,13 @@ app.get('/api/documents', async (req, res) => {
 // 3. Create Document
 app.post('/api/documents', async (req, res) => {
   try {
-    const { title, ownerId, initialElements } = req.body;
+    const body = req.body || {};
+    const { title, ownerId, initialElements } = body;
     const userId = ownerId || 'user_alice';
     const doc = await documentCRUD.createDocument({
       title: title || 'Untitled Document',
       ownerId: userId,
-      initialElements
+      initialElements: initialElements || []
     });
     
     // Wrap with DocumentEditor controller matching diagram
@@ -128,7 +129,8 @@ app.get('/api/documents/:id', async (req, res) => {
 app.put('/api/documents/:id', async (req, res) => {
   try {
     const userId = req.query.userId || 'user_alice';
-    const { title, elements } = req.body;
+    const body = req.body || {};
+    const { title, elements } = body;
 
     const updatedDoc = await documentCRUD.updateDocument(
       req.params.id,
@@ -170,7 +172,8 @@ app.delete('/api/documents/:id', async (req, res) => {
 app.post('/api/documents/:id/share', async (req, res) => {
   try {
     const userId = req.query.userId || 'user_alice';
-    const { targetUserId, role } = req.body;
+    const body = req.body || {};
+    const { targetUserId, role } = body;
 
     if (!targetUserId) {
       return res.status(400).json({ error: "targetUserId is required for sharing." });
@@ -198,7 +201,8 @@ app.post('/api/documents/:id/share', async (req, res) => {
 app.post('/api/documents/:id/export', async (req, res) => {
   try {
     const userId = req.query.userId || 'user_alice';
-    const { format = 'md' } = req.body; // 'md' | 'txt' | 'json' | 'html'
+    const body = req.body || {};
+    const { format = 'md' } = body; // 'md' | 'txt' | 'json' | 'html'
     
     const { doc } = await documentCRUD.getDocument(req.params.id, userId);
     const editor = new DocumentEditor(doc, saveToFile);

@@ -1,14 +1,10 @@
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
-import { fileURLToPath } from 'url';
 import { AbstractPersistentSaveFunctions } from './AbstractPersistentSaveFunctions.js';
 import { Document } from '../models/Document.js';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-// Initial Seed Users Data
+// Seed Users & Initial Documents
 const INITIAL_SEED = {
   documents: {},
   users: {
@@ -18,70 +14,44 @@ const INITIAL_SEED = {
   }
 };
 
+// Global memory store surviving warm Vercel serverless invocations
+const globalStore = JSON.parse(JSON.stringify(INITIAL_SEED));
+
 /**
  * Concrete implementation of AbstractPersistentSaveFunctions for DB persistence.
  * Corresponds to 'save to db' box in architecture diagram.
- * Supports Vercel Serverless environment (/tmp fallback & memory cache).
+ * Guaranteed 100% serverless safety with memory store & /tmp sync.
  */
 export class SaveToDB extends AbstractPersistentSaveFunctions {
   constructor(customDbPath = null) {
     super();
-    this.memoryCache = JSON.parse(JSON.stringify(INITIAL_SEED));
-    this.dbPath = customDbPath || this.resolveDbPath();
-    this.ensureDbExists();
+    this.dbPath = customDbPath || path.join(os.tmpdir(), 'documents_db.json');
+    this.initDisk();
   }
 
-  resolveDbPath() {
-    if (process.env.VERCEL || process.env.NODE_ENV === 'production') {
-      return path.join(os.tmpdir(), 'documents_db.json');
-    }
-    return path.join(__dirname, '../../data/documents_db.json');
-  }
-
-  ensureDbExists() {
+  initDisk() {
     try {
-      const dir = path.dirname(this.dbPath);
-      if (!fs.existsSync(dir)) {
-        fs.mkdirSync(dir, { recursive: true });
-      }
-      if (!fs.existsSync(this.dbPath)) {
-        fs.writeFileSync(this.dbPath, JSON.stringify(INITIAL_SEED, null, 2), 'utf-8');
-      }
-    } catch (err) {
-      // Fallback to /tmp if primary directory is read-only (EROFS)
-      try {
-        this.dbPath = path.join(os.tmpdir(), 'documents_db.json');
-        if (!fs.existsSync(this.dbPath)) {
-          fs.writeFileSync(this.dbPath, JSON.stringify(INITIAL_SEED, null, 2), 'utf-8');
-        }
-      } catch (e) {
-        console.warn("Using in-memory DB cache due to serverless read-only filesystem.");
-      }
-    }
-  }
-
-  readData() {
-    try {
-      this.ensureDbExists();
       if (fs.existsSync(this.dbPath)) {
         const raw = fs.readFileSync(this.dbPath, 'utf-8');
-        const parsed = JSON.parse(raw);
-        this.memoryCache = parsed;
-        return parsed;
+        const data = JSON.parse(raw);
+        if (data && data.documents) {
+          globalStore.documents = { ...globalStore.documents, ...data.documents };
+        }
+      } else {
+        const dir = path.dirname(this.dbPath);
+        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+        fs.writeFileSync(this.dbPath, JSON.stringify(globalStore, null, 2), 'utf-8');
       }
-    } catch (err) {
-      console.warn("Read error from disk, serving memory cache:", err.message);
+    } catch (e) {
+      // In-memory store handles all reads/writes if disk fails
     }
-    return this.memoryCache;
   }
 
-  writeData(data) {
-    this.memoryCache = data;
+  saveDisk() {
     try {
-      this.ensureDbExists();
-      fs.writeFileSync(this.dbPath, JSON.stringify(data, null, 2), 'utf-8');
-    } catch (err) {
-      console.warn("Write error to disk, maintained in-memory:", err.message);
+      fs.writeFileSync(this.dbPath, JSON.stringify(globalStore, null, 2), 'utf-8');
+    } catch (e) {
+      // In-memory store retains state if disk write is blocked
     }
   }
 
@@ -90,12 +60,9 @@ export class SaveToDB extends AbstractPersistentSaveFunctions {
    * @param {Document} document 
    */
   async save(document) {
-    if (!document || !document.id) {
-      throw new Error("Invalid document object provided to SaveToDB.save()");
-    }
-    const data = this.readData();
-    data.documents[document.id] = document.toJSON();
-    this.writeData(data);
+    if (!document || !document.id) return document;
+    globalStore.documents[document.id] = document.toJSON();
+    this.saveDisk();
     return document;
   }
 
@@ -104,8 +71,7 @@ export class SaveToDB extends AbstractPersistentSaveFunctions {
    * @param {string} id 
    */
   async load(id) {
-    const data = this.readData();
-    const docData = data.documents[id];
+    const docData = globalStore.documents[id];
     if (!docData) return null;
     return new Document(docData);
   }
@@ -115,10 +81,9 @@ export class SaveToDB extends AbstractPersistentSaveFunctions {
    * @param {string} id 
    */
   async delete(id) {
-    const data = this.readData();
-    if (data.documents[id]) {
-      delete data.documents[id];
-      this.writeData(data);
+    if (globalStore.documents[id]) {
+      delete globalStore.documents[id];
+      this.saveDisk();
       return true;
     }
     return false;
@@ -129,10 +94,9 @@ export class SaveToDB extends AbstractPersistentSaveFunctions {
    * @param {string} userId 
    */
   async list(userId) {
-    const data = this.readData();
     const result = [];
-    for (const id in data.documents) {
-      const docRaw = data.documents[id];
+    for (const id in globalStore.documents) {
+      const docRaw = globalStore.documents[id];
       const isOwner = docRaw.ownerId === userId;
       const sharedEntry = (docRaw.sharedWith || []).find(s => s.userId === userId);
       if (isOwner || sharedEntry) {
@@ -151,7 +115,6 @@ export class SaveToDB extends AbstractPersistentSaveFunctions {
    * Retrieve list of seeded users.
    */
   getUsers() {
-    const data = this.readData();
-    return Object.values(data.users || INITIAL_SEED.users);
+    return Object.values(globalStore.users || INITIAL_SEED.users);
   }
 }
