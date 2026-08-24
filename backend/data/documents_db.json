@@ -1,0 +1,556 @@
+{
+  "documents": {
+    "727b136f-106a-4d31-ad59-f29a69f4b0c0": {
+      "id": "727b136f-106a-4d31-ad59-f29a69f4b0c0",
+      "title": "test 1",
+      "ownerId": "user_bob",
+      "sharedWith": [],
+      "elements": [
+        {
+          "id": "6b5aa858-3457-4ea9-873b-900b65299db8",
+          "type": "text",
+          "createdAt": "2026-08-24T12:14:54.947Z",
+          "content": "hiiii this is the test page of my editor",
+          "heading": "h1",
+          "bold": true,
+          "italic": true,
+          "underline": true,
+          "listType": "bullet",
+          "align": "left"
+        },
+        {
+          "id": "el_1787573193997_5squ",
+          "type": "text",
+          "createdAt": "2026-08-24T12:14:54.947Z",
+          "content": "hiiii my name is sumit ",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "center"
+        }
+      ],
+      "createdAt": "2026-08-24T12:06:12.994Z",
+      "updatedAt": "2026-08-24T12:14:54.947Z"
+    },
+    "b30348dd-748d-4cc7-a4ed-105e6572735c": {
+      "id": "b30348dd-748d-4cc7-a4ed-105e6572735c",
+      "title": "Untitled Document",
+      "ownerId": "user_bob",
+      "sharedWith": [],
+      "elements": [
+        {
+          "id": "a4585cdd-2476-4966-8817-8072ff7892df",
+          "type": "text",
+          "createdAt": "2026-08-24T12:07:06.036Z",
+          "content": "Welcome to your new document! Start editing here...",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        }
+      ],
+      "createdAt": "2026-08-24T12:07:06.036Z",
+      "updatedAt": "2026-08-24T12:07:06.036Z"
+    },
+    "b3ffb80c-9ca8-4169-8e11-f67531db9344": {
+      "id": "b3ffb80c-9ca8-4169-8e11-f67531db9344",
+      "title": "test 1",
+      "ownerId": "user_alice",
+      "sharedWith": [],
+      "elements": [
+        {
+          "id": "209f7087-cf51-4c12-be86-bc383d0c9815",
+          "type": "text",
+          "createdAt": "2026-08-24T12:14:22.611Z",
+          "content": "Welcome to your new document! Start editing here...",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        }
+      ],
+      "createdAt": "2026-08-24T12:14:18.380Z",
+      "updatedAt": "2026-08-24T12:14:22.611Z"
+    },
+    "6eeab92d-fcd5-4c09-928d-72647ef2a99a": {
+      "id": "6eeab92d-fcd5-4c09-928d-72647ef2a99a",
+      "title": "Shared Strategy Doc (Updated by Bob)",
+      "ownerId": "user_alice",
+      "sharedWith": [
+        {
+          "userId": "user_bob",
+          "role": "editor"
+        },
+        {
+          "userId": "user_charlie",
+          "role": "viewer"
+        }
+      ],
+      "elements": [],
+      "createdAt": "2026-08-24T12:16:43.723Z",
+      "updatedAt": "2026-08-24T12:16:43.766Z"
+    },
+    "79ccb5f0-4c1b-4eca-a9fd-099f1b1ef275": {
+      "id": "79ccb5f0-4c1b-4eca-a9fd-099f1b1ef275",
+      "title": "Imported: SUMIT KUMAR new resume",
+      "ownerId": "user_alice",
+      "sharedWith": [],
+      "elements": [
+        {
+          "id": "26727056-8b12-4762-bc81-e117dd0d5bdd",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "SUMIT KUMAR",
+          "heading": "h1",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "6bcdaccb-7bd1-4f10-b540-4cdb5d7ae523",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "Delhi, India | +91-9643960335 | sumit.work9604@gmail.com",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "193478bc-4b07-4897-ae88-29efba65d00d",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "GitHub: https://github.com/sumit-9604 | LinkedIn: https://www.linkedin.com/in/sumit-chaudhary9604",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "76342153-dd5a-4209-af39-19777a159d56",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "PROFESSIONAL SUMMARY",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "b40d0dea-d152-42e0-a411-af9e9a92e9ed",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "CS undergraduate with expertise in C++, Python, React, and AI/ML. Experienced in building system-level and AI projects. IBM SkillsBuild certified with 3+ practical projects and hands-on internship experience.  Proficient in tokenization, attention mechanisms, fine-tuning LLMs, and neural network architectures (CNNs, RNNs, LSTMs) using PyTorch & Hugging Face. Built transformer-based classifiers and exploring RAG for document Q&A.",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "00f46483-d827-4bf7-bcd3-8749cb663ab3",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "PROFESSIONAL EXPERIENCE",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "385a4c64-a499-4600-bbae-1beaf33c7452",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "Summer Intern – Artificial Intelligence",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "b530cae2-f86f-4c5f-b6be-0d1d9675d300",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "IBM SkillsBuild Summer Internship Program (CSRBOX Foundation) | Jul – Aug 2024",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "f1d25973-3780-4593-9c25-a4abe5076901",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "Completed 3-week intensive AI internship; earned official certificate (ID: IBMSB24AISI15Jy5AtCB)",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "4752c75d-3ac5-42dc-9cbb-ce2a0af9a836",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "Mastered ML pipeline: data preprocessing → model training → evaluation → deployment",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "09eed6f5-95de-44c8-93f3-09b6b6b20b95",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "Earned 4 IBM SkillsBuild certifications (AI Agent, Data Analytics, Project Management, Design)",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "bf18a7ca-6125-4d7b-b4a2-66f2407cdd6a",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "TECHNICAL SKILLS",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "3f097d45-6648-47bf-9788-934991990699",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "Languages: C++, Python, Java, JavaScript",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "9ba58319-9378-4c3e-ba3c-5170598c88a1",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "Web: React.js, HTML ,  CSS , Node.js | AI/ML: PyTorch, TensorFlow, Scikit-learn",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "e45c562f-6b2f-438d-b32b-aa93577aab12",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "Databases & Tools: MySQL, Git, Linux, VS Code",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "5f41c136-2edd-4d5e-97b5-4efdd22f05f2",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "Core CS: DSA, Operating Systems, OOP, DBMS",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "43c0a2af-dd3b-4c01-949a-668dc24d3734",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "PROJECTS",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "f60cdd05-f631-4929-913d-1a9bdda63069",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "Schedulux – CPU Scheduling Visualizer (Jan – Apr 2026)",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "70ce49f2-1942-4659-b46b-cfc2af0de6fd",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "Full-stack visualization system (React + C++) with 4 scheduling algorithms",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "f2b70edc-b61c-4bf2-bc64-2b152330faa7",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "High-performance C++ engine with JSON output",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "6d5c9798-9130-467c-ae27-e9a304fbeb2c",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "Real-time Gantt chart visualization for FCFS, SJF, Priority, Round Robin",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "25793cc2-a24a-49f3-887e-627abb84ba7e",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "AI Expense Tracker (Oct – Dec 2025)",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "4790f5e6-0314-494d-982f-0ca9d0356690",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "AI-powered application (Python, React, Flask) with automated expense categorization",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "db11fb8a-2293-472e-9f53-00fc78410770",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "ML model achieving 90%+ accuracy; processes 500+ transactions with financial analytics",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "7e9b70b0-d6a0-466c-a9cb-ede3f9a62bb1",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "DSA Visualizer – C++ & React (Jan – Mar 2025)",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "894146df-9859-4f2b-9906-132e03541c0d",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "Interactive visualization for sorting, searching, stack, queue algorithms",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "a1b0ad44-231b-4cdd-9d25-2fcb554b9e66",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "Step-by-step execution with animations; 50+ students using for learning",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "024d2ea9-9fd6-41c0-93c5-4429198ecc9b",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "CERTIFICATIONS",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "adda1d7e-15b1-4684-b975-a30787a8abda",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "Build an AI Agent - IBM SkillsBuild (Apr 2026) | https://www.credly.com/go/5YqtNo82",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "6a88efb3-b02b-4326-b605-be89e59130f3",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "Data Analytics Internship Program - IBM SkillsBuild (2024)",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "26e4a5e1-e37f-4041-8362-692d00d70803",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "Project Management Fundamentals - IBM SkillsBuild (Jul 2024) | https://www.credly.com/badges/c4e773a0-2876-43b3-9e8a-c1b0ec542ef8",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "be5d94e8-e5a5-415b-837d-d96a7266f34c",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "IBM Design Fundamentals - IBM SkillsBuild (Apr 2026)",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "347e2564-2605-4ba8-86c5-0372cc599794",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "EDUCATION",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        },
+        {
+          "id": "fcb85481-f7a7-474d-9df5-79f6703e5a70",
+          "type": "text",
+          "createdAt": "2026-08-24T12:26:00.770Z",
+          "content": "B.Tech Computer Science & Engineering (CGPA: 7.5) Maharaja Agrasen Institute of Technology, GGSIPU, Delhi | 2023 – 2027",
+          "heading": "normal",
+          "bold": false,
+          "italic": false,
+          "underline": false,
+          "listType": "none",
+          "align": "left"
+        }
+      ],
+      "createdAt": "2026-08-24T12:26:00.772Z",
+      "updatedAt": "2026-08-24T12:26:00.772Z"
+    },
+    "0a71373a-e794-4916-a1a4-b7a529f3d391": {
+      "id": "0a71373a-e794-4916-a1a4-b7a529f3d391",
+      "title": "Shared Strategy Doc (Updated by Bob)",
+      "ownerId": "user_alice",
+      "sharedWith": [
+        {
+          "userId": "user_bob",
+          "role": "editor"
+        },
+        {
+          "userId": "user_charlie",
+          "role": "viewer"
+        }
+      ],
+      "elements": [],
+      "createdAt": "2026-08-24T12:27:14.546Z",
+      "updatedAt": "2026-08-24T12:27:14.602Z"
+    }
+  },
+  "users": {
+    "user_alice": {
+      "id": "user_alice",
+      "name": "Alice Smith",
+      "email": "alice@ajaia.com",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Alice"
+    },
+    "user_bob": {
+      "id": "user_bob",
+      "name": "Bob Johnson",
+      "email": "bob@ajaia.com",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Bob"
+    },
+    "user_charlie": {
+      "id": "user_charlie",
+      "name": "Charlie Lee",
+      "email": "charlie@ajaia.com",
+      "avatar": "https://api.dicebear.com/7.x/avataaars/svg?seed=Charlie"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+LIVE PRODUCT DEPLOYMENT URL
+===========================
+http://localhost:3000 (Local Live Server)
+
+Paste your public live deployment link below (e.g. Render / Vercel / Railway / ngrok):
+https://your-app-deployment-url.com
