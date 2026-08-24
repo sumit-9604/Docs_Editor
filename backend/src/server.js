@@ -3,6 +3,7 @@ import cors from 'cors';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
+import os from 'os';
 import { fileURLToPath } from 'url';
 
 import { SaveToDB } from './persistence/SaveToDB.js';
@@ -17,14 +18,25 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-// Setup directories
-const UPLOADS_DIR = path.join(__dirname, '../uploads');
-if (!fs.existsSync(UPLOADS_DIR)) {
-  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+// Setup directories safely for serverless
+const UPLOADS_DIR = process.env.VERCEL
+  ? path.join(os.tmpdir(), 'uploads')
+  : path.join(__dirname, '../uploads');
+
+try {
+  if (!fs.existsSync(UPLOADS_DIR)) {
+    fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+  }
+} catch (err) {
+  console.warn("Uploads directory fallback:", err.message);
 }
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json({ limit: '10mb' }));
 app.use('/uploads', express.static(UPLOADS_DIR));
 
